@@ -658,10 +658,13 @@ class Console
             }
 
             if (!$success && !$restart) {
+                $exception = $this->versionManager->getLastException();
+
                 Out::out('%s (%s) error: %s',
                     $version,
                     $action,
-                    $this->versionManager->getLastException()->getMessage()
+                    $exception->getMessage()
+                    . ' (' . $exception->getFile() . '::' . $exception->getLine() . ')'
                 );
             }
 
